@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import bodyParser from "body-parser";
 import {
   getUsers,
@@ -21,6 +22,25 @@ app.use(
 app.get("/", (request, response) => {
   response.json({ info: "Node.js, Express, and Postgres API" });
 });
+
+const accessOrigins = [
+  "http://localhost:3001",
+  "https://solar-system-xi-amber.vercel.app",
+  "https://solarsystembe-production.up.railway.app",
+];
+const corsOptions = {
+  origin: (origin, corsNext) => {
+    if (!origin || accessOrigins.indexOf(origin) !== -1) {
+      console.log("Origin: ", origin);
+      corsNext(null, true);
+    } else {
+      corsNext(new Error(`Access to server denied, your origin: ${origin}`));
+    }
+  },
+};
+
+// CORS
+app.use(cors(corsOptions));
 
 app.get("/users", getUsers);
 app.get("/users/:id", getUserById);
