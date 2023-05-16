@@ -1,13 +1,16 @@
 import { pool } from "./pg.js";
 
 export const getPlanets = (request, response) => {
-  pool.query("SELECT * FROM planets ORDER BY id ASC", (error, results) => {
-    if (error) {
-      response.status(404).send("No planets were found.");
-    } else {
-      response.status(200).json(results.rows);
+  pool.query(
+    "SELECT p.planet_name, JSONB_AGG(c.city_name) AS cities FROM planets p LEFT JOIN cities c ON p.planet_id = c.planet_id GROUP BY p.planet_name, p.planet_id ORDER BY p.planet_id;",
+    (error, results) => {
+      if (error) {
+        response.status(404).send("No planets and cities were found.");
+      } else {
+        response.status(200).json(results.rows);
+      }
     }
-  });
+  );
 };
 
 // export const getUserById = (request, response) => {
