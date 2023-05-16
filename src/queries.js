@@ -2,7 +2,7 @@ import { pool } from "./pg.js";
 
 export const getPlanets = (request, response) => {
   pool.query(
-    "SELECT p.planet_name, JSONB_AGG(c.city_name) AS cities FROM planets p LEFT JOIN cities c ON p.planet_id = c.planet_id GROUP BY p.planet_name, p.planet_id ORDER BY p.planet_id;",
+    "SELECT p.planet_name, p.planet_size, JSONB_AGG(c.city_name) AS cities FROM planets p LEFT JOIN cities c ON p.planet_id = c.planet_id GROUP BY p.planet_name, p.planet_size, p.planet_id ORDER BY p.planet_id;",
     (error, results) => {
       if (error) {
         response.status(404).send("No planets and cities were found.");
