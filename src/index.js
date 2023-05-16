@@ -18,6 +18,7 @@ app.get("/", (request, response) => {
 });
 
 const accessOrigins = [
+  "http://localhost:3000",
   "http://localhost:3001",
   "https://solar-system-xi-amber.vercel.app",
   "https://solarsystembe-production.up.railway.app",
