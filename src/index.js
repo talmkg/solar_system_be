@@ -19,6 +19,7 @@ const io = new Server(httpServer, {
     origin: [
       "http://localhost:3000",
       "http://localhost:3001",
+      "http://localhost:3002",
       "https://solar-system-xi-amber.vercel.app",
       "https://solarsystembe-production.up.railway.app",
     ],
@@ -26,10 +27,9 @@ const io = new Server(httpServer, {
   },
 }); // this constructor is expecting to receive an HTTP-SERVER as parameter not an EXPRESS SERVER!!!
 io.on("connection", connection_handler); // "connection" is NOT a custom event! This is a socket.io event, triggered every time a new client connects!
-// app.use(express.json());
+app.use(express.json());
 
 const accessOrigins = [
-  "http://localhost:3000/",
   "http://localhost:3000",
   "http://localhost:3001",
   "http://localhost:3002",
