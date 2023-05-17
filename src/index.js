@@ -49,20 +49,21 @@ app.get("/planets", getPlanets);
 // });
 
 //
-pool.connect((err) => {
-  if (err) {
-    console.error("Failed to connect to PostgreSQL:", err);
-    return;
-  }
-  console.log("Successfully connected to PostgreSQL!");
-  // Start the server
-  // app.listen(port, () => {
-  //   console.table(listEndpoints(app));
-  //   console.log(`App running on port ${port}.`);
-  // });
-  console.log("Starting http server...");
-  httpServer.listen(port, () => {
-    console.table(listEndpoints(app));
-    console.log(`Server is running on port ${port}`);
-  });
+// pool.connect((err) => {
+//   if (err) {
+//     console.error("Failed to connect to PostgreSQL:", err);
+//     return;
+//   }
+//   console.log("Successfully connected to PostgreSQL!");
+//   // Start the server
+//   // app.listen(port, () => {
+//   //   console.table(listEndpoints(app));
+//   //   console.log(`App running on port ${port}.`);
+//   // });
+//   console.log("Starting http server...");
+
+// });
+httpServer.listen(port, () => {
+  console.table(listEndpoints(app));
+  console.log(`Server is running on port ${port}`);
 });
