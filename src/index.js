@@ -14,16 +14,8 @@ const app = express();
 const port = 3002;
 
 const httpServer = createServer(app);
-const io = new Server(httpServer, {
-  cors: {
-    origin: [
-      "http://localhost:3000",
-      "http://localhost:3001",
-      "https://solar-system-xi-amber.vercel.app",
-      "https://solarsystembe-production.up.railway.app",
-    ],
-  },
-}); // this constructor is expecting to receive an HTTP-SERVER as parameter not an EXPRESS SERVER!!!
+const io = new Server(httpServer); // this constructor is expecting to receive an HTTP-SERVER as parameter not an EXPRESS SERVER!!!
+io.on("connection", connection_handler); // "connection" is NOT a custom event! This is a socket.io event, triggered every time a new client connects!
 // app.use(express.json());
 
 const accessOrigins = [
@@ -44,10 +36,7 @@ const corsOptions = {
 };
 
 // CORS
-
 app.use(cors(corsOptions));
-
-io.on("connection", connection_handler); // "connection" is NOT a custom event! This is a socket.io event, triggered every time a new client connects!
 
 app.get("/planets", getPlanets);
 
