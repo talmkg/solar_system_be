@@ -29,26 +29,26 @@ const io = new Server(httpServer, {
 io.on("connection", connection_handler); // "connection" is NOT a custom event! This is a socket.io event, triggered every time a new client connects!
 app.use(express.json());
 
-const accessOrigins = [
-  "http://localhost:3000",
-  "http://localhost:3001",
-  "http://localhost:3002",
-  "https://solar-system-xi-amber.vercel.app",
-  "https://solarsystembe-production.up.railway.app",
-];
-const corsOptions = {
-  origin: (origin, corsNext) => {
-    if (!origin || accessOrigins.indexOf(origin) !== -1) {
-      console.log("Origin: ", origin);
-      corsNext(null, true);
-    } else {
-      corsNext(new Error(`Access to server denied, your origin: ${origin}`));
-    }
-  },
-};
+// const accessOrigins = [
+//   "http://localhost:3000",
+//   "http://localhost:3001",
+//   "http://localhost:3002",
+//   "https://solar-system-xi-amber.vercel.app",
+//   "https://solarsystembe-production.up.railway.app",
+// ];
+// const corsOptions = {
+//   origin: (origin, corsNext) => {
+//     if (!origin || accessOrigins.indexOf(origin) !== -1) {
+//       console.log("Origin: ", origin);
+//       corsNext(null, true);
+//     } else {
+//       corsNext(new Error(`Access to server denied, your origin: ${origin}`));
+//     }
+//   },
+// };
 
-// CORS
-app.use(cors(corsOptions));
+// // CORS
+// app.use(cors(corsOptions));
 
 app.get("/planets", getPlanets);
 
