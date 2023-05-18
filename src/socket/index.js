@@ -2,7 +2,9 @@ let onlineUsers = [];
 
 export const connection_handler = (newClient) => {
   console.log("NEW CONNECTION:", newClient.id);
-  newClient.emit("welcome", { message: `Welcome, ${newClient.id}.` });
+  newClient.emit("welcome", {
+    message: `Welcome to AstroLink, user_${newClient.id}!`,
+  });
   //   newClient.on("Login", (payload) => {
   //     onlineUsers.push({
   //       _id: payload._id,
