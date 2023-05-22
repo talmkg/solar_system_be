@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 //queries
-import { getPlanets } from "./queries.js";
+import { getPlanets, getUserById } from "./queries.js";
 //socket.io
 import { Server } from "socket.io";
 import { createServer } from "http";
@@ -51,6 +51,7 @@ io.on("connection", connection_handler); // "connection" is NOT a custom event! 
 app.use(express.json());
 
 app.get("/planets", getPlanets);
+app.get("/users/:id", getUserById);
 //
 // app.listen(port, () => {
 //   console.log(`App running on port ${port}.`);

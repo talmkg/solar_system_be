@@ -13,16 +13,17 @@ export const getPlanets = (request, response) => {
   );
 };
 
-// export const getUserById = (request, response) => {
-//   const id = parseInt(request.params.id);
+export const getUserById = (request, response) => {
+  const id = parseInt(request.params.id);
 
-//   pool.query("SELECT * FROM users WHERE id = $1", [id], (error, results) => {
-//     if (error) {
-//       throw error;
-//     }
-//     response.status(200).json(results.rows);
-//   });
-// };
+  pool.query("SELECT * FROM users WHERE id = $1", [id], (error, results) => {
+    try {
+      response.status(200).json(results.rows);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+};
 
 // export const createUser = (request, response) => {
 //   const { name, email } = request.body;
