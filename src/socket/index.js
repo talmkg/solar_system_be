@@ -14,7 +14,17 @@ export const connection_handler = (newClient) => {
     newClient.emit("onlineUsers", onlineUsers);
     newClient.broadcast.emit("onlineUsers", onlineUsers);
   });
-
+  newClient.on("moving", (payload) => {
+    console.log(
+      payload.username,
+      "is moving from",
+      payload.from,
+      "to",
+      payload.to
+    );
+    newClient.emit("moving", payload);
+    newClient.broadcast.emit("moving", payload);
+  });
   //   newClient.on("sendMessage", (message) => {
   //     console.log(message);
   //     const saveToMongo = async () => {
