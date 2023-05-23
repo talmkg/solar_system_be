@@ -5,16 +5,15 @@ export const connection_handler = (newClient) => {
   newClient.emit("welcome", {
     message: `Welcome to AstroLink, user_${newClient.id}!`,
   });
-  //   newClient.on("Login", (payload) => {
-  //     onlineUsers.push({
-  //       _id: payload._id,
-  //       username: payload.username,
-  //       socketId: newClient.id,
-  //     });
-  //     console.log(onlineUsers);
-  //     newClient.emit("loggedIn", onlineUsers);
-  //     newClient.broadcast.emit("updateOnlineUsersList", onlineUsers);
-  //   });
+  newClient.on("login", (payload) => {
+    onlineUsers.push({
+      id: payload.id,
+      username: payload.username,
+      socketId: newClient.id,
+    });
+    newClient.emit("onlineUsers", onlineUsers);
+    newClient.broadcast.emit("onlineUsers", onlineUsers);
+  });
 
   //   newClient.on("sendMessage", (message) => {
   //     console.log(message);
